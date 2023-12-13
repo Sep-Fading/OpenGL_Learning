@@ -34,7 +34,7 @@ int main() {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
+    // comment
     glfwTerminate();
     return 0;
 }
