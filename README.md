@@ -15,3 +15,5 @@ The purpose of the project is to learn C++ as well as dive into some OpenGL stuf
 - Creating a blank window.
 
 *14/12/2023*
+- Learned some basic key input handling.
+- Can now close the window when ESCAPE is pressed!
