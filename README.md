@@ -17,3 +17,5 @@ The purpose of the project is to learn C++ as well as dive into some OpenGL stuf
 *14/12/2023*
 - Learned some basic key input handling.
 - Can now close the window when ESCAPE is pressed!
+- Learned the purpose of buffer swapping
+- Added GLAD Library to the project.
