@@ -9,6 +9,9 @@ The purpose of the project is to learn C++ as well as dive into some OpenGL stuf
 - Render a specific model on the window.
   
 # So far achieved:
+*13/12/2023*
 - Learning how to import libraries to the project with CMake.
 - Compiling a working executable.
 - Creating a blank window.
+
+*14/12/2023*
