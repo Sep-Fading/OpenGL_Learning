@@ -27,3 +27,9 @@ The purpose of the project is to learn C++ as well as dive into some OpenGL stuf
 - Removed redundant glfwDestroyWindow(window);
 - Rendered some color on the screen.
 - Added function that takes in RGBA floats and clears the screen with that color.
+- Learned how OpenGL renders stuff using vertices.
+- Learned about normalized device coordinates.
+- Learned about GPU buffers.
+- Sent some data to the GPU memory I assigned in the program.
+- Created a basic vertex shader.
+- Created a method to check for the compilation status of the vertex shader.
