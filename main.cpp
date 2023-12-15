@@ -142,8 +142,10 @@ void HandleShaders() {
 void CheckShaderCompilation(unsigned int shader) {
     int success;
     char infoLog[512];
+    // Get compile status of the given shader and give the code to the success variable as likely boolean (0,1)?
     glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 
+    // Result check.
     if (!success){
         glGetShaderInfoLog(shader, 512, nullptr, infoLog);
         cout << "GLSL: Vertex Shader compilation failed ! \n" << infoLog;
