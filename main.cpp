@@ -2,7 +2,22 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+
+// Source code for vertex shader:
+const char *vertexShaderSource = "#version 330 core\n"
+                                 "layout (location = 0) in vec3 aPos;\n"
+                                 "void main()\n"
+                                 "{\n"
+                                 "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+                                 "}\0";
+
 void ClearWithColor(float red, float green, float blue, float alpha);
+
+void CreateTriangle();
+
+void HandleShaders();
+
+void CheckShaderCompilation(unsigned int shader);
 
 using namespace std;
 
@@ -62,11 +77,14 @@ int main() {
     // Sets the key_callback function to apply to this window.
     glfwSetKeyCallback(window, key_callback);
 
+    // Method to handle making the required shaders.
+    HandleShaders();
+
     // While window is not supposed to close.
     while (!glfwWindowShouldClose(window)){
         // Render here
         ClearWithColor(0.2f, 0.3f, 0.3f, 1.0f);
-
+        CreateTriangle();
         // --------------------------------------------------------------------
 
         glfwSwapBuffers(window); // This one swaps back and front buffer, back one is the one you
@@ -83,4 +101,51 @@ int main() {
 void ClearWithColor(float red, float green, float blue, float alpha) {
     glClearColor(red, green, blue, alpha);
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+// Creates a triangle on the screen.
+void CreateTriangle(){
+    // Giving OpenGL vertices that we want the triangle to be made on.
+    float vertices[] = {
+            -0.5f, -0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+            0.0f, 0.5f, 0.0f
+    };
+
+    // Creates this memory space to store vertices in the GPU.
+    unsigned int VBO;
+    glGenBuffers(1, &VBO);
+
+    // Bind the created buffer to GL_ARRAY_BUFFER
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    // Send the vertices defined for the triangle to the GPU memory.
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+}
+
+// Handles the shader creation.
+void HandleShaders() {
+    // Create vertex shader
+    unsigned int vertexShader;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+    // Attach the shader source code to the shader object and compile it.
+    glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
+    glCompileShader(vertexShader);
+
+    // Method to check if the shader compiled successfully.
+    CheckShaderCompilation(vertexShader);
+}
+
+// Checks to see if a given shader compiles fine.
+void CheckShaderCompilation(unsigned int shader) {
+    int success;
+    char infoLog[512];
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+
+    if (!success){
+        glGetShaderInfoLog(shader, 512, nullptr, infoLog);
+        cout << "GLSL: Vertex Shader compilation failed ! \n" << infoLog;
+    }
 }
