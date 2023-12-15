@@ -67,7 +67,6 @@ int main() {
         // Render here
         ClearWithColor(0.2f, 0.3f, 0.3f, 1.0f);
 
-
         // --------------------------------------------------------------------
 
         glfwSwapBuffers(window); // This one swaps back and front buffer, back one is the one you
