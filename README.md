@@ -33,3 +33,7 @@ The purpose of the project is to learn C++ as well as dive into some OpenGL stuf
 - Sent some data to the GPU memory I assigned in the program.
 - Created a basic vertex shader.
 - Created a method to check for the compilation status of the vertex shader.
+
+*16/12/2023*
+- Added a basic fragment shader with a call to check its compilation status.
+- The method used to check the compilation status of the vertex shader now just works with any given shader passed in as a parameter.
