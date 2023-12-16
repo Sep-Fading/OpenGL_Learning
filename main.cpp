@@ -11,6 +11,15 @@ const char *vertexShaderSource = "#version 330 core\n"
                                  "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
                                  "}\0";
 
+// Source code for the fragment shader:
+const char *fragmentShaderSource = "#version 420 core\n"
+                                   "out vec4 FragColor;\n"
+                                   "\n"
+                                   "void main()\n"
+                                   "{\n"
+                                   "    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+                                   "}\0";
+
 void ClearWithColor(float red, float green, float blue, float alpha);
 
 void CreateTriangle();
@@ -136,6 +145,18 @@ void HandleShaders() {
 
     // Method to check if the shader compiled successfully.
     CheckShaderCompilation(vertexShader);
+
+
+    // Create fragment shader
+    unsigned int fragmentShader;
+    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    // Attach the shader source code to the shader object and compile it.
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
+    glCompileShader(fragmentShader);
+
+    // Check fragment shader compilation status.
+    CheckShaderCompilation(fragmentShader);
 }
 
 // Checks to see if a given shader compiles fine.
