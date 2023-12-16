@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 
 
+// Shader source codes are written in GLSL, You can find the stand-alone files in the project.
 // Source code for vertex shader:
 const char *vertexShaderSource = "#version 330 core\n"
                                  "layout (location = 0) in vec3 aPos;\n"
