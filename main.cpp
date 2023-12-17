@@ -29,6 +29,8 @@ void HandleShaders();
 
 void CheckShaderCompilation(unsigned int shader);
 
+void CheckShaderProgramHealth(unsigned int program);
+
 using namespace std;
 
 // Error call backs for GLFW
@@ -87,7 +89,7 @@ int main() {
     // Sets the key_callback function to apply to this window.
     glfwSetKeyCallback(window, key_callback);
 
-    // Method to handle making the required shaders.
+    // Method to handle making the required shaders. (Will also activate the shader program!)
     HandleShaders();
 
     // While window is not supposed to close.
@@ -103,6 +105,7 @@ int main() {
         glfwPollEvents(); // Checks if events are triggered, updates window state and calls the corresponding functions.
     }
 
+    // Closing the window.
     glfwTerminate();
     return 0;
 }
@@ -158,6 +161,25 @@ void HandleShaders() {
 
     // Check fragment shader compilation status.
     CheckShaderCompilation(fragmentShader);
+
+    // Create the shader program from our created shaders.
+    unsigned int shaderProgram;
+    shaderProgram = glCreateProgram();
+
+    // Attach the compiled shaders to the object and link them with glLinkProgram.
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+
+    // Check the shader program for any linking errors.
+    CheckShaderProgramHealth(shaderProgram);
+
+    // Activate the shader program.
+    glUseProgram(shaderProgram);
+
+    // We no longer need the individual shader objects, we dispose of them.
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
 }
 
 // Checks to see if a given shader compiles fine.
@@ -171,5 +193,20 @@ void CheckShaderCompilation(unsigned int shader) {
     if (!success){
         glGetShaderInfoLog(shader, 512, nullptr, infoLog);
         cout << "GLSL: Vertex Shader compilation failed ! \n" << infoLog;
+    }
+}
+
+// Checks to see if the shaders are now correctly linked to a shader program.
+void CheckShaderProgramHealth(unsigned int program) {
+    int success;
+    char infoLog[512];
+
+    // Get program status
+    glGetProgramiv(program, GL_LINK_STATUS, &success);
+
+    // Result check.
+    if(!success) {
+        glGetProgramInfoLog(program, 512, nullptr, infoLog);
+        cout << "Shader Program: Linking failed ! \n" << infoLog;
     }
 }
