@@ -135,6 +135,12 @@ void CreateTriangle(){
     // Send the vertices defined for the triangle to the GPU memory.
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+    // Telling OpenGL how to interpret the vertex data using glVertexAttribPointer
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    // Draw the actual object.
+
 }
 
 // Handles the shader creation.
