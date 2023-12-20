@@ -3,8 +3,8 @@ Passion project to make a multiplayer game engine to build my game on, mostly se
 
 The purpose of the project is to learn C++ as well as dive into some OpenGL stuff and learn to use their libraries.
 
-# Current Goals (Top 3 things I'm currently working towards achieving on this project for the week):
-- Render shape on the window.
+# Current Goals (Top 3 things I'm currently working towards achieving on this project):
+- ~~Render shape on the window.~~ (Completed!)
 - Move the rendered thing in the window.
 - Render a specific model on the window.
   
@@ -43,3 +43,6 @@ The purpose of the project is to learn C++ as well as dive into some OpenGL stuf
 
 *20/12/2023*
 - Specified how OpenGL should interpret the vertex data.
+- Created a Vertex Array Object (VAO)
+- Created a method that handles drawing a triangle onto the screen DrawTriangle().
+- Rendered an orange triangle on the window!
