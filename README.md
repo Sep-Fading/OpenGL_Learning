@@ -40,3 +40,6 @@ The purpose of the project is to learn C++ as well as dive into some OpenGL stuf
 
 *17/12/2023*
 - Linked the vertex and fragment shader to a shader program and activated it.
+
+*20/12/2023*
+- Specified how OpenGL should interpret the vertex data.
