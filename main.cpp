@@ -21,6 +21,9 @@ const char *fragmentShaderSource = "#version 420 core\n"
                                    "    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
                                    "}\0";
 
+// Shader Program
+unsigned int shaderProgram;
+
 void ClearWithColor(float red, float green, float blue, float alpha);
 
 void CreateTriangle();
@@ -30,6 +33,8 @@ void HandleShaders();
 void CheckShaderCompilation(unsigned int shader);
 
 void CheckShaderProgramHealth(unsigned int program);
+
+void DrawTriangle(unsigned int program, unsigned int vao);
 
 using namespace std;
 
@@ -125,6 +130,15 @@ void CreateTriangle(){
             0.0f, 0.5f, 0.0f
     };
 
+
+    // Initialization code (done once unless object frequently changes.)
+    // Creating a VAO (Vertex Array Object) which stores the vertex attribute config and which VBO to use.
+    // When used to draw objects, take the corresponding VAO, bind it, draw and unbind once done.
+    unsigned int VAO;
+    glGenVertexArrays(1, &VAO);
+    // Bind the VAO
+    glBindVertexArray(VAO);
+
     // Creates this memory space to store vertices in the GPU.
     unsigned int VBO;
     glGenBuffers(1, &VBO);
@@ -139,8 +153,19 @@ void CreateTriangle(){
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    // Draw the actual object.
+    // Draw the triangle
+    DrawTriangle(shaderProgram, VAO);
+}
 
+// Method that draws a Triangle on the screen.
+void DrawTriangle(unsigned int program, unsigned int vao) {
+    glUseProgram(program);
+    glBindVertexArray(vao);
+
+    // Arguments - 1. Primitive type we would like to draw.
+    // 2. Starting index of the vertex array we'd like to draw.
+    // 3. How many vertices we want to draw, which is 3, it's a triangle!
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 // Handles the shader creation.
@@ -169,7 +194,6 @@ void HandleShaders() {
     CheckShaderCompilation(fragmentShader);
 
     // Create the shader program from our created shaders.
-    unsigned int shaderProgram;
     shaderProgram = glCreateProgram();
 
     // Attach the compiled shaders to the object and link them with glLinkProgram.
