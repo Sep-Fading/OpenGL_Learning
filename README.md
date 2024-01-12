@@ -1,5 +1,5 @@
-# MMO-Engine
-Passion project to make a multiplayer game engine to build my game on, mostly serving as a dev kit for the game rather than a general-purpose engine.
+# OpenGL Learning
+Aimed towards a Passion project to make a multiplayer game engine to build my game on, mostly serving as a dev kit for the game rather than a general-purpose engine.
 
 The purpose of the project is to learn C++ as well as dive into some OpenGL stuff and learn to use their libraries.
 
